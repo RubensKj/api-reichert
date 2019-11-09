@@ -52,6 +52,12 @@ public class UsuarioController {
         throw new UsuarioNaoEncontrado("Não existe nenhum usuário com este id - Erro ao editar o usuário");
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
+        usuarioServico.deleteUserById(id);
+        return ResponseEntity.ok("Usuário deletado com sucesso!");
+    }
+
     private boolean validaPayloadUsuario(UsuarioPayload usuarioPayload) {
         return checkIfStringIsEmpty(usuarioPayload.getNomeCompleto()) || checkIfStringIsEmpty(usuarioPayload.getCpf()) ||
                 checkIfStringIsEmpty(usuarioPayload.getNumeroCelular()) || checkIfStringIsEmpty(usuarioPayload.getTipoIngresso());
